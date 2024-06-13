@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import userRoutes from "./routes/userRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
 import { v2 as cloudinary } from "cloudinary";
+import cors from "cors";
 
 dotenv.config();
 connetDb();
@@ -22,6 +23,9 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extends: true }));
 app.use(cookieParser());
 
+app.use(cors());
+app.options("/api/users/", cors());
+app.options("/api/posts/", cors());
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 
